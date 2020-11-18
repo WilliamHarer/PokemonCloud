@@ -17,7 +17,7 @@ function App() {
             options={props.pokemon}
             getOptionLabel={(option) => option.name}
             style={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" style={{backgroundColor: 'white', borderRadius: "5px",margin:'5px'}}/>}
+            renderInput={(params) => <TextField {...params} label="pokemon" variant="outlined" style={{backgroundColor: 'white', borderRadius: "5px",margin:'5px'}}/>}
         />
     );
   }
