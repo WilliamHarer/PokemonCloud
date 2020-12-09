@@ -26,12 +26,55 @@ async function startDbAndServer() {
     console.log('listening on port 3000');
 }
 
+function typeCalc() {
+    const poke = pokemon['pokemon']
+    const typesOff = ['normal', 
+                        'fire', 
+                        'fighting', 
+                        'water', 
+                        'flying', 
+                        'grass', 
+                        'poison', 
+                        'electric', 
+                        'ground', 
+                        'psychic', 
+                        'rock', 
+                        'ice', 
+                        'bug', 
+                        'dragon', 
+                        'ghost', 
+                        'dark', 
+                        'steel', 
+                        'fairy']
+                //no,fir,fig,wa,fl,grass,po,el,gr,psy,ro,ice,bug,dra,gho,drk,ste,fairy
+    let typesDef = [[1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+                    [1, .5, 1, 2, 1, .5, 1, 1, 2, 1, 2, .5, .5, 1, 1, 1, .5, .5],
+                    [1, 1, 1, 1, 2, 1, 1, 1, 1, 2, .5, 1, .5, 1, 1, .5, 1, 2],
+                    [1, .5, 1, .5, 1, 2, 1, 2, 1, 1, 1, .5, 1, 1, 1, 1, .5, 1],
+                    [1, 1, .5, 1, 1, .5, 1, 2, 0, 1, 2, 2, .5, 1, 1, 1, 1, 1],
+                    [1, 2, 1, .5, 2, .5, 2, .5, .5, 1, 1, 2, 2, 1, 1, 1, 1, 1],
+                    [1, 1, .5, 1, 1, .5, .5, 1, 2, 2, 1, 1, .5, 1, 1, 1, 1, .5],
+                    [1, 1, 1, 1, .5, 1, 1, .5, 2, 1, 1, 1, 1, 1, 1, 1, .5, 1],
+                    [1, 1, 1, 2, 1, 2, .5, 0, 1, 1, .5, 2, 1, 1, 1, 1, 1, 1],
+                    [1, 1, .5, 1, 1, 1, 1, 1, 1, .5, 1, 1, 2, 1, 2, 2, 1, 1],
+                    [.5, .5, 2, 2, .5, 2, .5, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1],
+                    [1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, .5, 1, 1, 1, 1, 2, 1],
+                    [1, 2, .5, 1, 2, .5, 1, 1, .5, 1, 2, 1, 1, 1, 1, 1, 1, 1],
+                    [1, .5, 1, .5, 1, .5, 1, .5, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2],
+                    [0, 1, 0, 1, 1, 1, .5, 1, 1, 1, 1, 1, .5, 1, 2, 2, 1, 1],
+                    [1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 1, .5, .5, 1, 2],
+                    [.5, 2, 2, 1, .5, .5, 0, 1, 2, .5, .5, .5, .5, .5, 1, 1, .5, .5],
+                    [1, 1, .5, 1, 1, 1, 2, 1, 1, 1, 1, 1, .5, 0, 1, .5, 2, 1]
+                ]
+}
+
+
 startDbAndServer();
 ////////////////////////////////////////////////////////////////////////////////
 /*
  * Complete the onSaveCard function, which takes in an HTTP request 'req'.
  * 'req' is sent when _onFormSubmit in "public/js/creator-view.js" is executed. 
- * The request sends 'const params = {style: this.style, message: this.message}'
+ * The request sends 'const params = {monName: this.monName, type1: this.type1}'
  * to the Node server.
  * 
  * After receiving the request, the Node server should save it in the 'card' collection
@@ -44,8 +87,9 @@ async function onSaveMon(req, res) {
     // Your code goes here.
     const routeParams = req.params;
     const id = routeParams.id;
-    const style = req.body.style;
-    const message = req.body.message;
+    const monName = req.body.monName;
+    const type1 = req.body.type1;
+    const type2 = req.body.type2;
     const query = { pokemonID: id };
     const newEntry = { id: id, monName: monName, type1: type1, type2: type2 };
     const params = { upsert: true };
@@ -81,6 +125,6 @@ async function onGetMon(req, res) {
 
 app.get('/get/:pokemonID', onGetMon);
 async function onGetMonView(req, res) {
-    res.sendFile(resolve(__dirname, 'public', 'index.html'));
+    res.sendFile(resolve(__dirname, 'src', 'App.js'));
 }
 app.get('*', onGetMonView);
