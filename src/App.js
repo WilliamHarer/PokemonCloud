@@ -24,6 +24,7 @@ function App() {
   const poke=pokemon['pokemon']
   const typesOff=['normal','fire','fighting','water','flying','grass','poison','electric','ground','psychic','rock','ice','bug','dragon','ghost','dark','steel','fairy']
   //no,fir,fig,wa,fl,grass,po,el,gr,psy,ro,ice,bug,dra,gho,drk,ste,fairy
+    //Does the branch replace master?
   let typesDef=[[1,1,2,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1],
                 [1,.5,1,2,1,.5,1,1,2,1,2,.5,.5,1,1,1,.5,.5],
                 [1,1,1,1,2,1,1,1,1,2,.5,1,.5,1,1,.5,1,2],
