@@ -1,15 +1,16 @@
 import logo from './logo.svg';
-//import InputBox from "./InputBox";
+import InputBox2 from "./InputBox2";
 import './App.css';
 import pokemon from "./pokemon.json"
 import {Autocomplete} from "@material-ui/lab";
 import {TextField} from "@material-ui/core";
-import React from "react";
+import React, {useState} from "react";
+import Button from "@material-ui/core/Button";
 //Getpokemon() getPokemon.js
 //does it go here?
 //const pokemon=getpokemon()?
 function App() {
-  function InputBox(props) {
+  /*function InputBox(props) {
     return (
         <Autocomplete
             id="combo-box-demo"
@@ -19,8 +20,10 @@ function App() {
             renderInput={(params) => <TextField {...params} label="pokemon" variant="outlined" style={{backgroundColor: 'white', borderRadius: "5px",margin:'5px'}}/>}
         />
     );
-  }
+  }*/
+    //this.context.pokemonTeam=[]
     const poke = pokemon['pokemon']
+    const names= ["pke1","pke2","pk3","pk4","pk5","pk6"]
     const typeDict={'normal':0, 'fire':1, 'fighting':2, 'water':3, 'flying':4, 'grass':5, 'poison':6, 'electric':7, 'ground':8, 'psychic':9, 'rock':10, 'ice':11, 'bug':12, 'dragon':13, 'ghost':14, 'dark':15, 'steel':16, 'fairy':17}
     function calc(pokemon) {
         //no,fir,fig,wa,fl,grass,po,el,gr,psy,ro,ice,bug,dra,gho,drk,ste,fairy
@@ -64,17 +67,33 @@ function App() {
         }
         return typeSet
     }
+    async function ClickSave(e){
+      e.preventDefault(e)
+      const target=e.target;
+      console.log(target.poke1.value)
+      const params = {
+            team:pokemon
+        }
+        const fetchOptions = {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(params)
+        };
+        const result = await fetch('/save', fetchOptions);
+        const json = await result.json();
+    }
   ///does it go here?
+    //onSubmit={ClickSave}
   return (
     <div className="App">
       <header className="App-header">
-        <InputBox pokemon={poke}/>
-        <InputBox pokemon={poke}/>
-        <InputBox pokemon={poke}/>
-        <InputBox pokemon={poke}/>
-        <InputBox pokemon={poke}/>
-        <InputBox pokemon={poke}/>
-      </header>
+>       <InputBox2 pokemon={poke}></InputBox2>
+        </header>
+
+
     </div>
   );
 }

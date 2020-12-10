@@ -1,5 +1,24 @@
 const express = require('express');
+const path = require('path');
+const bodyParser=require('body-parser');
+const mongodb = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID
+const MONGO_URL='mongodb://localhost:27017/teams-db';
 const app = express();
+const jsonParser=bodyParser.json();
+app.use(express.static('public'));
+let db=null;
+
+
+async function startDbAndServer(){
+    mongodb.connect(MONGO_URL,(err,client)=>{
+        db=client.db('teams')
+    });
+    await app.listen(3000);
+    console.log('listening on port 3000');
+}
+startDbAndServer();
+//const app = express();
 
 /* Complete the onSaveCard function, which takes in an HTTP request 'req'.
 * 'req' is sent when _onFormSubmit in "public/js/creator-view.js" is executed.
@@ -30,12 +49,28 @@ async function onSaveCard(req, res) {
     const response 	= await db.collection('cards').update(query,newEntry,params);
     res.json({success:true});
 }*/
-app.get('/saveTeam', function (req, res){
+async function onSaveTeam(req, res){
+    const routeParams=req.params;
+    const team=routeParams.team;
+    const query = {teamID:id};
+    const newEntry={team:team};
+    const params =  {upsert:true};
+    const response = await db.collection('teams').update(query,newEntry,params);
     //Save stuff to mongo return ID
     return res.send('TeamIDfromMongo')
-})
-app.get('/getTeam',function(req,res){
-    //get stuff from mongo based on ID
-    return res.send('teamResultBasedOnID')
-})
+}
+app.post('/save',jsonParser,onSaveTeam);
+async function onGetCard(req,res){
+    const routeParams = req.params;
+    const id = routeParams.id;
+    const query = {teamID:id};
+    const result = await db.collection('teams').findOne(query);
+    const response = {
+        id:id,
+        style : result ? result.team: ''
+    }
+    res.json(response);
+
+}
+app.get('/get/:teamID',onGetCard);
 app.listen(8080)
