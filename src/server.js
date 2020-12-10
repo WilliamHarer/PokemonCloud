@@ -49,19 +49,33 @@ async function onSaveCard(req, res) {
     const response 	= await db.collection('cards').update(query,newEntry,params);
     res.json({success:true});
 }*/
-async function onSaveTeam(req, res){
-    const routeParams=req.params;
-    const team=routeParams.team;
-    const id = routeParams.id;
-    const query = {teamID:id};
-    const newEntry={team:team};
-    const params =  {upsert:true};
-    const response = await db.collection('teams').update(query,newEntry,params);
-    //Save stuff to mongo return ID
-    return res.send('TeamIDfromMongo')
+// async function onSaveTeam(req, res){
+//     const routeParams=req.params;
+//     const team=routeParams.team;
+//     const query = {teamID:id};
+//     const newEntry={team:team};
+//     const params =  {upsert:true};
+//     const response = await db.collection('teams').update(query,newEntry,params);
+//     //Save stuff to mongo return ID
+//     return res.send('TeamIDfromMongo')
+// }
+async function onSaveTeam(req, res) {
+    const routeParams = req.params;
+    const team        = routeParams.team;
+    const teamName    = routeParams.teamName
+    const query = {
+        teamName: teamName
+    };
+    const newEntry = {
+        teamName: teamName,
+        team: team
+    };
+    const response = await collection.update(query, newEntry);
+    res.json(response)
 }
 app.post('/save',jsonParser,onSaveTeam);
-async function onGetCard(req,res){
+
+async function onGetCard(req,res) {
     const routeParams = req.params;
     const id = routeParams.id;
     const query = {teamID:id};
@@ -71,7 +85,6 @@ async function onGetCard(req,res){
         style : result ? result.team: ''
     }
     res.json(response);
-
 }
 app.get('/get/:teamID',onGetCard);
 app.listen(8080)
