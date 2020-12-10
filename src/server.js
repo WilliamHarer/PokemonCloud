@@ -1,5 +1,18 @@
-const express = require('express');
+/*
+ * server code to connect with DB
+ */
+import express, { static } from 'express';
+import { resolve } from 'path';
+import { json } from 'body-parser';
+import { MongoClient as mongodb } from 'mongodb';
+import { ObjectID } from 'mongodb';
+
+const MONGO_URL = 'mongodb://localhost:27017/';
 const app = express();
+const jsonParser = json();
+app.use(static('public'));
+let db = null;
+let collection = null;
 
 /* Complete the onSaveCard function, which takes in an HTTP request 'req'.
 * 'req' is sent when _onFormSubmit in "public/js/creator-view.js" is executed.
@@ -30,12 +43,34 @@ async function onSaveCard(req, res) {
     const response 	= await db.collection('cards').update(query,newEntry,params);
     res.json({success:true});
 }*/
-app.get('/saveTeam', function (req, res){
+async function onSaveTeam(req, res){
     //Save stuff to mongo return ID
+    const routeParams = req.params;
+    const id = routeParams.id;
+    const team = routeParams.team;
+    const query = { pokemonID: id };
+    const newEntry = {id: id, team: team}
+    const params = {upsert: true};
+    const response = await db.collection('team').update(query, newEntry, params);
+    res.json({success: true});
     return res.send('TeamIDfromMongo')
-})
+}
+
+app.post('/save', jsonParser, onSaveTeam);
+
 app.get('/getTeam',function(req,res){
     //get stuff from mongo based on ID
     return res.send('teamResultBasedOnID')
 })
 app.listen(8080)
+
+
+
+/* {team: [
+        mon1
+        mon2,
+        3,
+        4
+        5
+        6
+]}
