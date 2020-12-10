@@ -3,6 +3,7 @@ import {TextField} from "@material-ui/core";
 import React, {useRef, useState} from "react";
 export default function InputBox2(props){
     const ref0=useRef();
+    const [teamName,setTeamName]=useState("")
     const [pokemon1,setPokemon1]=useState(props.pokemon[0]);
     const [pokemon2,setPokemon2]=useState(props.pokemon[0]);
     const [pokemon3,setPokemon3]=useState(props.pokemon[0]);
@@ -32,6 +33,11 @@ export default function InputBox2(props){
                 renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
             />*/
             <form>
+                <TextField id="filled-basic" label="Filled" variant="filled" value={teamName} onChange={e => {
+                    setTeamName(e.target.value);
+                    console.log(e.target.value);
+                }}/>
+                }
                 <Autocomplete
                     value={pokemon1}
                     options={props.pokemon}
@@ -110,7 +116,7 @@ export default function InputBox2(props){
                     renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
                 />
                 <input type="button" value="button" onClick={(e)=>{
-                    let team={team:{pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}}
+                    let team={teamName:teamName,team:{pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}}
                     console.log(team);}}/>
             </form>
 
