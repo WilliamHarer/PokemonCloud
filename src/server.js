@@ -52,6 +52,7 @@ async function onSaveCard(req, res) {
 async function onSaveTeam(req, res){
     const routeParams=req.params;
     const team=routeParams.team;
+    const id = routeParams.id;
     const query = {teamID:id};
     const newEntry={team:team};
     const params =  {upsert:true};

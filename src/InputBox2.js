@@ -10,7 +10,27 @@ export default function InputBox2(props){
     const [pokemon4,setPokemon4]=useState(props.pokemon[0]);
     const [pokemon5,setPokemon5]=useState(props.pokemon[0]);
     const [pokemon6,setPokemon6]=useState(props.pokemon[0]);
-
+    async function saveTeam(event){
+        //let team={teamName:teamName,team:{pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}}
+        const params = {
+            teamName: teamName,
+            message: {pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}
+        }
+        const fetchOptions = {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(params)
+        };
+        const result = await fetch('/onSaveTeam', fetchOptions);
+        const json = await result.json();
+        console.log(json)
+       /* this.creatorView.classList.add('hidden');
+        this.cardLink.href = '/id/' + json.cardId;
+        this.statusView.classList.remove('hidden');*/
+    }
         return(
             /*<Autocomplete
                 name={props.name}
@@ -117,7 +137,8 @@ export default function InputBox2(props){
                 />
                 <input type="button" value="button" onClick={(e)=>{
                     let team={teamName:teamName,team:{pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}}
-                    console.log(team);}}/>
+                    console.log(team);
+                }}/>
             </form>
 
         );
