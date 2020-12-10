@@ -109,7 +109,7 @@ export default function InputBox2(props){
                     style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
                 />
-                <input type="button" value="button" onClick={(e)=>{
+                <input type="submit" value="save team" onClick={(e)=>{
                     let team={team:{pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}}
                     console.log(team);}}/>
             </form>
