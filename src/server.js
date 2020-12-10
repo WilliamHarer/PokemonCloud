@@ -86,5 +86,5 @@ async function onGetCard(req,res) {
     }
     res.json(response);
 }
-app.get('/get/:teamID',onGetCard);
-app.listen(8080)
+// app.get('/get/:teamID',onGetCard);
+// app.listen(8080)
