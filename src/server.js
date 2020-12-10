@@ -6,7 +6,7 @@ const ObjectID = require('mongodb').ObjectID
 const MONGO_URL='mongodb://localhost:27017/teams-db';
 const app = express();
 const jsonParser=bodyParser.json();
-app.use(express.static('public'));
+app.use(express.static('src'));
 let db=null;
 
 
@@ -63,14 +63,16 @@ async function onSaveTeam(req, res) {
     const routeParams = req.params;
     const team        = routeParams.team;
     const teamName    = routeParams.teamName
-    const query = {
-        teamName: teamName
-    };
+    // const query = {
+    //     teamName: teamName
+    // };
+    // console.log(query)
     const newEntry = {
         teamName: teamName,
         team: team
     };
-    const response = await collection.update(query, newEntry);
+    console.log(newEntry)
+    const response = await collection.insertOne(newEntry);
     res.json(response)
 }
 app.post('/save',jsonParser,onSaveTeam);
