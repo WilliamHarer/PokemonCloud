@@ -1,0 +1,16 @@
+.pokemon{
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:10px;
+    background-color:lightcoral;
+}
+.Info{
+    width:50%;
+    margin-right:auto;
+    margin-left:auto;
+    color:black;
+}
+.weakness{
+    color:black;
+    background-color:lightcoral;
+}

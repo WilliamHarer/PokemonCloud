@@ -12,10 +12,13 @@ let db=null;
 
 async function startDbAndServer(){
     mongodb.connect(MONGO_URL,(err,client)=>{
+        if(err) throw err;
         db=client.db('teams')
+        console.log(db)
     });
-    await app.listen(3000);
-    console.log('listening on port 3000');
+    await app.listen(8080);
+    //console.log(conRes);
+    console.log('listening on port 8080');
 }
 startDbAndServer();
 //const app = express();
@@ -60,31 +63,39 @@ async function onSaveCard(req, res) {
 //     return res.send('TeamIDfromMongo')
 // }
 async function onSaveTeam(req, res) {
-    const routeParams = req.params;
+    //console.log(req)
+    const routeParams = req.body;
+    //console.log(routeParams)
     const team        = routeParams.team;
-    const teamName    = routeParams.teamName
+    const teamName    = routeParams.teamName;
+    //console.log(team);
+    //console.log(teamName);
     const query = {
         teamName: teamName
     };
-    const newEntry = {
+    const newEntry = {$set:{
         teamName: teamName,
         team: team
-    };
-    const response = await collection.update(query, newEntry);
+    }};
+    const params={upsert:true}
+    const response = await db.collection('teams').findOneAndUpdate(query, newEntry,params);
     res.json(response)
 }
 app.post('/save',jsonParser,onSaveTeam);
 
 async function onGetCard(req,res) {
+    console.log(req)
     const routeParams = req.params;
-    const id = routeParams.id;
-    const query = {teamID:id};
+    console.log(routeParams)
+    const teamName = routeParams.teamName;
+    const query = {teamName:teamName};
     const result = await db.collection('teams').findOne(query);
     const response = {
-        id:id,
-        style : result ? result.team: ''
+        teamName:teamName,
+        team : result ? result.team: ''
     }
+    console.log(response)
     res.json(response);
 }
-// app.get('/get/:teamID',onGetCard);
+app.get('/get/:teamName',onGetCard);
 // app.listen(8080)

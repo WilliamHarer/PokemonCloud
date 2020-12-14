@@ -1,11 +1,14 @@
 import logo from './logo.svg';
 import InputBox2 from "./InputBox2";
+import Results from "./Results";
 import './App.css';
 import pokemon from "./pokemon.json"
 import {Autocomplete} from "@material-ui/lab";
 import {TextField} from "@material-ui/core";
 import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
+import {BrowserRouter} from "react-router-dom";
+import {Route, Router, Switch, useLocation} from "react-router";
 //Getpokemon() getPokemon.js
 //does it go here?
 //const pokemon=getpokemon()?
@@ -67,6 +70,7 @@ function App() {
         }
         return typeSet
     }
+    let location=useLocation();
     async function ClickSave(e){
       e.preventDefault(e)
       const target=e.target;
@@ -88,14 +92,20 @@ function App() {
   ///does it go here?
     //onSubmit={ClickSave}
   return (
-    <div className="App">
-      <header className="App-header">
->       <InputBox2 pokemon={poke}></InputBox2>
-        </header>
-
-
-    </div>
+          <BrowserRouter>
+              <Switch>
+                  <Route path="/results">
+                      <Results/>
+                  </Route>
+                  <Route path="/">
+                      <div className="App">
+                          <header className="App-header">
+                            <InputBox2 pokemon={poke}/>
+                          </header>
+                      </div>
+                  </Route>
+              </Switch>
+          </BrowserRouter>
   );
 }
-
 export default App;
