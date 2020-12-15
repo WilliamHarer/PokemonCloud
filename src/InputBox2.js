@@ -24,7 +24,6 @@ export default function InputBox2(props){
     function calc() {
         //no,fir,fig,wa,fl,grass,po,el,gr,psy,ro,ice,bug,dra,gho,drk,ste,fairy
         //0  1   2   3   4  5    6  7   8  9  10  11   12  13 14  15 16   17
-        //Does the branch replace master?
         let pokemon=[pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6];
         let typeSet=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         let typesDef = [[1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
@@ -86,12 +85,9 @@ export default function InputBox2(props){
         redirectClick(params);
     }
     async function saveTeam(){
-        //let team={teamName:teamName,team:{pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}}
         const params = {
             teamName: teamName,
             team: {pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}
-            //start:start,
-            //time:time,
 
         }
         const fetchOptions = {
@@ -106,32 +102,9 @@ export default function InputBox2(props){
         const json = await result.json();
         console.log(json)
         redirectClick(params);
-       /* this.creatorView.classList.add('hidden');
-        this.cardLink.href = '/id/' + json.cardId;
-        this.statusView.classList.remove('hidden');*/
     }
     const [weaknesses,setWeaknesses]=useState(['normal', 'fire', 'fighting', 'water', 'flying', 'grass', 'poison', 'electric', 'ground', 'psychic', 'rock', 'ice', 'bug', 'dragon', 'ghost', 'dark', 'steel', 'fairy'])
         return(
-            /*<Autocomplete
-                name={props.name}
-                ref={ref0}
-                options={props.pokemon}
-                //onChange={handleChange}
-                //onChange={(event,value)=>console.log(value)}
-                /*onInputChange={(e, v, r) => {
-                    const ev = e.target;
-                    if (r === "reset") console.log(ev, v, r);
-                }}*/
-                /*onChange={(e, v, r) => {
-                    console.log(ref0.current.getAttribute("name"));
-                    setPokemon(v);
-                    console.log(v);
-
-                }}
-                getOptionLabel={(option) => option.name}
-                style={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
-            />*/
             <div>
                 <Grid container spacing={3}>
                 <Grid item xs={6}>
@@ -176,7 +149,6 @@ export default function InputBox2(props){
                         console.log(v);
 
                     }}
-                    //onChange={(event,value)=>console.log(value)}
                     getOptionLabel={(option) => option.name}
                     style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
@@ -186,7 +158,6 @@ export default function InputBox2(props){
                     value={pokemon4}
                     options={props.pokemon}
                     getOptionLabel={(option) => option.name}
-                    //onChange={(event,value)=>console.log(value)}
                     onChange={(e, v, r) => {
                         setPokemon4(v);
                         console.log(v);
@@ -204,7 +175,6 @@ export default function InputBox2(props){
                         console.log(v);
 
                     }}
-                    //onChange={(event,value)=>console.log(value)}
                     getOptionLabel={(option) => option.name}
                     style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
@@ -218,7 +188,6 @@ export default function InputBox2(props){
                         console.log(v);
 
                     }}
-                    //onChange={(event,value)=>console.log(value)}
                     getOptionLabel={(option) => option.name}
                     style={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
