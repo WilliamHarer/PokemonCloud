@@ -15,87 +15,97 @@ export class InputBox extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange=(event,value)=>
-    {
-        //const value = target.value;
+    handleChange = (event,value) => {
         this.setState({[event.target.name]:event.target.value});
-        //this.props.pokemonTeam.push(value)
         console.log(value);
         console.log(event.target.name);
-        //this.setState({value: event.target.value});
-
     }
-    handleSubmit(event){
+    handleSubmit(event) {
         alert('A pokemon was submitted'+ this.state.value);
         event.preventDefault();
     }
-    render (){
-        const {pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6}=this.state;
+    render() {
+        const {pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6} = this.state;
         return(
             <form>
                 <Autocomplete
-                    value={pokemon1}
-                    options={this.props.pokemon}
-                    onChange={this.handleChange}
-                    name="pokemon1"
-                    onChange={(event,value)=>console.log(value)}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    value = {pokemon1}
+                    options = {this.props.pokemon}
+                    onChange = {this.handleChange}
+                    name = "pokemon1"
+                    onChange = {(event, value) => console.log(value)}
+                    getOptionLabel = {(option) => option.name}
+                    style = {{ width: 300 }}
+                    renderInput = {
+                        (params) => <TextField {...params} label="Combo box" variant="outlined" 
+                        />
+                    }
                 />
                 <Autocomplete
-                    value={pokemon2}
-                    name="pokemon2"
-                    options={this.props.pokemon}
-                    onChange={this.handleChange}
+                    value = {pokemon2}
+                    name = "pokemon2"
+                    options = {this.props.pokemon}
+                    onChange = {this.handleChange}
                     //onChange={(event,value)=>console.log(value)}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    getOptionLabel = {(option) => option.name}
+                    style = {{ width: 300 }}
+                    renderInput = {
+                        (params) => <TextField {...params} label="Combo box" variant="outlined" 
+                        />
+                    }
                 />
                 <Autocomplete
-                    value={pokemon3}
-                    name="pokemon3"
-                    options={this.props.pokemon}
-                    onChange={this.handleChange}
+                    value = {pokemon3}
+                    name = "pokemon3"
+                    options = {this.props.pokemon}
+                    onChange = {this.handleChange}
                     //onChange={(event,value)=>console.log(value)}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    getOptionLabel = {(option) => option.name}
+                    style = {{ width: 300 }}
+                    renderInput = {
+                        (params) => <TextField {...params} label="Combo box" variant="outlined" 
+                        />
+                    }
                 />
                 <Autocomplete
-                    value={pokemon4}
-                    name="pokemon4"
-                    options={this.props.pokemon}
-                    onChange={this.handleChange}
+                    value = {pokemon4}
+                    name = "pokemon4"
+                    options = {this.props.pokemon}
+                    onChange = {this.handleChange}
                     //onChange={(event,value)=>console.log(value)}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    getOptionLabel = {(option) => option.name}
+                    style = {{ width: 300 }}
+                    renderInput = {
+                        (params) => <TextField {...params} label="Combo box" variant="outlined" 
+                        />
+                    }
                 />
                 <Autocomplete
-                    value={pokemon5}
-                    name="pokemon5"
-                    options={this.props.pokemon}
-                    onChange={this.handleChange}
+                    value = {pokemon5}
+                    name = "pokemon5"
+                    options = {this.props.pokemon}
+                    onChange = {this.handleChange}
                     //onChange={(event,value)=>console.log(value)}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    getOptionLabel = {(option) => option.name}
+                    style = {{ width: 300 }}
+                    renderInput = {(params) => <TextField {...params} label="Combo box" variant="outlined" 
+                    />
+                }
                 />
                 <Autocomplete
-                    value={pokemon6}
-                    name="pokemon6"
-                    options={this.props.pokemon}
-                    onChange={this.handleChange}
+                    value = {pokemon6}
+                    name = "pokemon6"
+                    options = {this.props.pokemon}
+                    onChange = {this.handleChange}
                     //onChange={(event,value)=>console.log(value)}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    getOptionLabel = {(option) => option.name}
+                    style = {{ width: 300 }}
+                    renderInput = {(params) => <TextField {...params} label="Combo box" variant="outlined" 
+                    />
+                }
                 />
-                <input type="submit" value="Submit" />
+                <input type="submit" value = "Submit" />
             </form>
-
-    );
+        );
     }
 }
